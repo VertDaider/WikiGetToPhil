@@ -42,12 +42,31 @@ public class WikiNodeExample {
         }
     }
 
-    private static void iterativeDFS(Element firstPara) {
+    private static void iterativeDFS(Node root) {
+        Deque<Node> stack = new ArrayDeque<Node>();
+        stack.push(root);
+
+        while (!stack.isEmpty()) {
+            Node node = stack.pop();
+            if (node instanceof TextNode) {
+                System.out.println(node);
+            }
+
+            List<Node> nodes = new ArrayList<Node>(node.childNodes());
+            Collections.reverse(nodes);
+            for (Node child : nodes) {
+                stack.push(child);
+            }
+        }
     }
 
-    private static void recursiveDFS(Element firstPara) {
+    private static void recursiveDFS(Node node) {
+        if (node instanceof TextNode) {
+            System.out.println(node);
+        }
+        for (Node child : node.childNodes()) {
+            recursiveDFS(child);
+        }
     }
-
-
 }
 
