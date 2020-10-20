@@ -91,7 +91,9 @@ public class WikiParser {
         if (startsWith(elt, "/wiki/Help:")) {
             return false;
         }
-        // TODO: there are a couple of other "rules" we haven't handled
+        if (elt.hasClass("image") || elt.hasClass("mw-selflink")) {
+            return false;
+        }
         return true;
     }
 

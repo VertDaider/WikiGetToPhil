@@ -22,8 +22,7 @@ public class WikiFetcher {
         Document doc = conn.get();
 
         Element content = doc.getElementById("mw-content-text");
-        Elements paras = content.select("p");
-        return paras;
+        return content.select("p");
     }
 
     private void sleepIfNeeded() {
