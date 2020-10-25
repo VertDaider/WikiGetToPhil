@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WikiPhilosophy {
-    private static final int NUMBER_OF_TRY = 20;
+    private static final int NUMBER_OF_TRY = 50;
     static List<String> visited = new ArrayList<>();
     static WikiFetcher wf = new WikiFetcher();
 
@@ -28,18 +28,14 @@ public class WikiPhilosophy {
             try {
                 testConjecture(destination, source, 50);
                 writeResult(visited.size());
-            } catch (NotValidLinkException e) {
+            } catch (NotValidLinkException | HttpStatusException e) {
                 System.out.println(e);
                 writeResult(-1);
             } catch (LoopException e) {
                 System.out.println(e);
                 writeResult(0);
-            } catch (HttpStatusException e) {
-                System.out.println(e);
-                // TODO: 20.10.2020 сделать что-то с несуществующими страницами
             } finally {
                 visited = new ArrayList<>();
-//                wf = new WikiFetcher();
             }
             System.out.printf("Осталось %d фрагов\n", NUMBER_OF_TRY - i);
         }
